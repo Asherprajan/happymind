@@ -1,15 +1,21 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import { Instagram, Facebook, Star, Menu } from "lucide-react"
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0a0f12] text-white font-sans">
+    <div className="min-h-screen bg-white text-[#0a0f12] font-sans">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-gray-800 bg-[#0a0f12]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0a0f12]/80">
+      <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image
@@ -22,37 +28,41 @@ export default function Home() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="#" className="text-sm font-medium hover:text-[#fff59d] transition-colors">
+            <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
               Home
             </Link>
-            <Link href="#" className="text-sm font-medium hover:text-[#fff59d] transition-colors">
+            <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
               About
             </Link>
-            <Link href="#" className="text-sm font-medium hover:text-[#fff59d] transition-colors">
+            <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
               Contact
             </Link>
-            <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-white">Shop on Amazon</Button>
+            <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] shadow-sm hover:shadow-md transition-all">
+              Shop on Amazon
+            </Button>
           </nav>
 
           <Sheet>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="outline" size="icon" className="border-gray-700">
+              <Button variant="outline" size="icon" className="border-gray-300 hover:border-[#fff59d]">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-[#0a0f12] border-gray-800">
+            <SheetContent side="right" className="bg-white border-gray-200">
               <nav className="flex flex-col gap-4 mt-8">
-                <Link href="#" className="text-lg font-medium hover:text-[#fff59d] transition-colors">
+                <Link href="#" className="text-lg font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
                   Home
                 </Link>
-                <Link href="#" className="text-lg font-medium hover:text-[#fff59d] transition-colors">
+                <Link href="#" className="text-lg font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
                   About
                 </Link>
-                <Link href="#" className="text-lg font-medium hover:text-[#fff59d] transition-colors">
+                <Link href="#" className="text-lg font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
                   Contact
                 </Link>
-                <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-white w-full mt-2">Shop on Amazon</Button>
+                <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] w-full mt-2 shadow-sm hover:shadow-md transition-all">
+                  Shop on Amazon
+                </Button>
               </nav>
             </SheetContent>
           </Sheet>
@@ -61,73 +71,209 @@ export default function Home() {
 
       <main>
         {/* Hero Banner */}
-        <section className="relative py-20 md:py-32 overflow-hidden bg-gradient-to-b from-[#0a0f12] to-[#1b1e22]">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#fff59d]/20 blur-3xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-[#fff59d]/10 blur-3xl"></div>
+        <section className="relative my-8 mx-4 md:mx-8 lg:mx-12">
+          <Swiper
+            modules={[Autoplay, Pagination, Navigation]}
+            spaceBetween={0}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+              el: '.swiper-pagination',
+              bulletClass: 'swiper-pagination-bullet',
+              bulletActiveClass: 'swiper-pagination-bullet-active',
+            }}
+            className="hero-swiper rounded-xl overflow-hidden shadow-lg"
+          >
+            <SwiperSlide>
+              <div className="relative h-[80vh]">
+                <Image
+                  src="/placeholder.svg?height=800&width=1600"
+                  alt="Herbal Wellness"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <div className="container px-4 text-center">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-white drop-shadow-lg">
+                      Balance Your Mind, Naturally.
+                    </h1>
+                    <p className="text-lg md:text-xl text-gray-100 mb-8 max-w-2xl mx-auto drop-shadow-md">
+                      Discover herbal supplements crafted for emotional well-being and mental clarity.
+                    </p>
+                    <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] px-8 py-6 text-lg rounded-full shadow-md hover:shadow-lg transition-all">
+                      Explore on Amazon
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="relative h-[80vh]">
+                <Image
+                  src="/placeholder.svg?height=800&width=1600"
+                  alt="Natural Healing"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <div className="container px-4 text-center">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-white">Ancient Wisdom, Modern Science</h1>
+                    <p className="text-lg md:text-xl text-gray-100 mb-8 max-w-2xl mx-auto">
+                      Blending traditional Ayurvedic herbs with cutting-edge research for optimal wellness.
+                    </p>
+                    <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] px-8 py-6 text-lg rounded-full">
+                      Shop Now
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="relative h-[80vh]">
+                <Image
+                  src="/placeholder.svg?height=800&width=1600"
+                  alt="Wellness Journey"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                  <div className="container px-4 text-center">
+                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-white">Your Path to Inner Peace</h1>
+                    <p className="text-lg md:text-xl text-gray-100 mb-8 max-w-2xl mx-auto">
+                      Start your journey to better mental health and emotional balance today.
+                    </p>
+                    <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] px-8 py-6 text-lg rounded-full">
+                      Learn More
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+
+          {/* Custom Pagination */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+            <div className="swiper-pagination"></div>
           </div>
-          <div className="container relative z-10 text-center max-w-3xl mx-auto px-4">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">Balance Your Mind, Naturally.</h1>
-            <p className="text-lg md:text-xl text-gray-300 mb-8">
-              Discover herbal supplements crafted for emotional well-being.
-            </p>
-            <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-white px-8 py-6 text-lg rounded-full">
-              Explore on Amazon
-            </Button>
-          </div>
+
+          <style jsx global>{`
+            .hero-swiper {
+              width: 100%;
+              height: 100%;
+              border-radius: 1rem;
+            }
+            .swiper-pagination-bullet {
+              background: white;
+              opacity: 0.5;
+              width: 10px;
+              height: 10px;
+              border-radius: 5px;
+              transition: all 0.3s ease;
+            }
+            .swiper-pagination-bullet-active {
+              background: #fff59d;
+              opacity: 1;
+              width: 20px;
+            }
+          `}</style>
         </section>
 
         {/* Product Grid Section */}
-        <section className="py-16 md:py-24 bg-[#0a0f12]">
+        <section className="py-16 md:py-24 bg-white">
           <div className="container px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Products</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">Our Products</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
+                  image: "/stressease.jpg",
                   name: "Stress Ease Pro",
                   benefit: "Reduces tension & anxiety",
                   ingredients: "Ashwagandha, Holy Basil, Lemon Balm",
+                  price: "₹ 699.00",
+                  link:"https://www.amazon.in/HappyMind-Botanicals-Supplement-Headaches-Ashwagandha/dp/B0DSGHLRH7?ref_=ast_sto_dp"
                 },
                 {
+                  image: "/positivesvibesonly.jpg",
                   name: "Positive Vibes Only",
                   benefit: "Enhances mood & outlook",
                   ingredients: "St. John's Wort, Saffron, B Vitamins",
+                  price: "₹ 699.00",
+                  link:"https://www.amazon.in/HappyMind-Botanicals-Supplement-Well-Being-Ashwagandha/dp/B0DSJTWVN8?ref_=ast_sto_dp"
                 },
                 {
+                  image: "/angerandcalm.jpg",
                   name: "Anger & Calm Ultra",
                   benefit: "Promotes emotional balance",
                   ingredients: "Passionflower, Chamomile, Magnesium",
+                  price: "₹ 699.00",
+                  link:"https://www.amazon.in/HappyMind-Botanicals-Naturally-Irritability-Ashwagandha/dp/B0DSJVLPD5?ref_=ast_sto_dp"
                 },
                 {
+                  image: "/memoryandfocus.jpg",
                   name: "Memory & Focus Max",
                   benefit: "Sharpens mental clarity",
                   ingredients: "Bacopa, Ginkgo, Lion's Mane",
+                  price: "₹ 699.00",
+                  link:"https://www.amazon.in/HappyMind-Botanicals-Supplement-Thinking-Shankhpushpi/dp/B0DT7G7CNQ?ref_=ast_sto_dp"
                 },
                 {
+                  image: "/sleepwellus.jpg",
                   name: "Sleep Well Plus",
                   benefit: "Supports restful sleep",
                   ingredients: "Valerian, Melatonin, L-Theanine",
+                  price: "₹ 699.00",
+                  link:"https://www.amazon.in/HappyMind-Botanicals-Sleep-Undisturbed-Ashwagandha/dp/B0DSJR7Z86?ref_=ast_sto_dp"
                 },
               ].map((product, index) => (
                 <div
                   key={index}
-                  className="bg-[#1b1e22] border border-gray-800 rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:border-[#fff59d]/50 hover:shadow-[0_0_15px_rgba(255,245,157,0.15)]"
+                  className="group bg-gradient-to-b from-white to-amber-50 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-full"
                 >
-                  <div className="bg-[#0a0f12] border border-gray-700 rounded-lg h-48 mb-4 flex items-center justify-center">
+                  <div className="relative h-56 overflow-hidden flex items-center justify-center bg-white">
                     <Image
-                      src="/placeholder.svg?height=438&width=438"
+                      src={product.image || "/placeholder.svg?height=1000&width=1000"}
                       alt={product.name}
-                      width={438}
-                      height={438}
-                      className="h-48 w-auto"
+                      width={1000}
+                      height={1000}
+                      className="object-contain w-auto h-full max-h-56 transform group-hover:scale-105 transition-transform duration-500"
                     />
+                    <div className="absolute top-3 right-3 bg-amber-100 text-amber-800 rounded-full px-3 py-1 text-xs font-semibold">
+                      Bestseller
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">{product.name}</h3>
-                  <p className="text-[#fff59d] mb-2">{product.benefit}</p>
-                  <p className="text-sm text-gray-400 mb-4 flex-grow">{product.ingredients}</p>
-                  <Button className="bg-transparent border border-[#fff59d] text-[#fff59d] hover:bg-[#fff59d] hover:text-[#0a0f12] w-full mt-auto">
-                    Buy on Amazon
-                  </Button>
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="flex items-center mb-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                      ))}
+                      <span className="text-xs text-gray-500 ml-2">4.9 (120)</span>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900">{product.name}</h3>
+                    <div className="bg-amber-100 text-amber-800 inline-block px-3 py-1 rounded-full text-sm font-medium mb-3">
+                      {product.benefit}
+                    </div>
+                    <p className="text-sm text-gray-600 mb-4 flex-grow">
+                      <span className="font-medium text-gray-700">Key ingredients: </span>
+                      {product.ingredients}
+                    </p>
+                    <div className="mt-auto flex flex-col gap-2">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-lg font-bold text-gray-900">{product.price}</span>
+                        <span className="text-sm text-green-600">Free shipping</span>
+                      </div>
+                      <Button className="bg-amber-400 hover:bg-amber-500 text-amber-900 w-full transition-all font-medium" onClick={() => window.open(product.link, '_blank')}>
+                        Buy on Amazon
+                      </Button> 
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -135,7 +281,7 @@ export default function Home() {
         </section>
 
         {/* Mid-Page Banner */}
-        <section className="py-12 bg-black">
+        <section className="py-12 bg-white border-y border-gray-200">
           <div className="container px-4 text-center">
             <div className="flex items-center justify-center gap-3 mb-4">
               <div className="h-px w-12 bg-[#fff59d]/50"></div>
@@ -171,33 +317,33 @@ export default function Home() {
               </svg>
               <div className="h-px w-12 bg-[#fff59d]/50"></div>
             </div>
-            <h2 className="text-xl md:text-2xl font-medium text-[#fff59d]">
+            <h2 className="text-xl md:text-2xl font-medium text-gray-900">
               100% Plant-Based | Backed by Ayurveda & Science
             </h2>
           </div>
         </section>
 
         {/* Image Banner Section */}
-        <section className="py-16 bg-[#0a0f12]">
+        <section className="py-16 bg-white">
           <div className="container px-4">
-            <div className="relative w-full h-[400px] rounded-2xl overflow-hidden">
+            <div className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="/placeholder.svg?height=800&width=1600"
+                src="/"
                 alt="Ayurvedic Wellness"
                 fill
                 className="object-cover"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center">
+              <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-center">
                 <div className="max-w-lg px-8 md:px-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 drop-shadow-lg">
                     Ancient Wisdom for Modern Wellness
                   </h2>
-                  <p className="text-gray-200 mb-6">
+                  <p className="text-gray-100 mb-6 drop-shadow-md">
                     Our formulations blend traditional Ayurvedic herbs with modern scientific research
                     to create effective, natural solutions for today's health challenges.
                   </p>
-                  <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176]">
+                  <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] shadow-md hover:shadow-lg transition-all">
                     Learn More
                   </Button>
                 </div>
@@ -207,106 +353,215 @@ export default function Home() {
         </section>
 
         {/* Best Seller Section */}
-        <section className="py-16 md:py-24 bg-[#0a0f12]">
+        <section className="py-16 md:py-24 bg-white">
           <div className="container px-4">
-            <div className="max-w-4xl mx-auto bg-gradient-to-b from-[#1b1e22] to-[#0a0f12] border border-gray-800 rounded-2xl p-6 md:p-10">
-              <div className="flex flex-col md:flex-row gap-8">
-                <div className="md:w-1/3 flex items-center justify-center">
-                  <div className="relative">
-                    <div className="absolute -top-4 -right-4 bg-[#fff59d] text-[#0a0f12] text-sm font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                      Bestseller <Star className="h-3 w-3 fill-[#0a0f12]" />
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">Our Bestsellers</h2>
+            <div className="grid grid-cols-1 gap-8">
+              {/* First Product */}
+              <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg">
+                <div className="flex flex-col gap-8">
+                  <div className="flex items-center justify-center">
+                    <div className="relative">
+                      <div className="absolute -top-4 -right-4 bg-[#fff59d] text-[#0a0f12] text-sm font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+                        Bestseller <Star className="h-3 w-3 fill-[#0a0f12]" />
+                      </div>
+                      <div className="bg-white border border-gray-200 rounded-lg h-64 w-64 flex items-center justify-center shadow-sm">
+                        <Image
+                          src="/stressease.jpg"
+                          alt="Stress Ease Pro"
+                          width={200}
+                          height={200}
+                          className="h-48 w-auto"
+                        />
+                      </div>
                     </div>
-                    <div className="bg-[#0a0f12] border border-gray-700 rounded-lg h-64 w-64 flex items-center justify-center">
-                      <Image
-                        src="/placeholder.svg?height=200&width=200"
-                        alt="Stress Ease Pro"
-                        width={200}
-                        height={200}
-                        className="h-48 w-auto"
-                      />
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold mb-2 text-gray-900">Stress Ease Pro</h2>
+                    <div className="flex items-center gap-1 mb-4">
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
                     </div>
+                    <p className="text-gray-600 mb-6">
+                      Our flagship formula designed to help your body adapt to stress naturally. Stress Ease Pro combines
+                      premium Ashwagandha, Holy Basil, and Lemon Balm to reduce tension, balance cortisol levels, and
+                      support a calm mind.
+                    </p>
+                    <ul className="mb-6 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[#fff59d]"
+                          >
+                            <path
+                              d="M20 6L9 17L4 12"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">Reduces tension & anxiety</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[#fff59d]"
+                          >
+                            <path
+                              d="M20 6L9 17L4 12"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">Balances cortisol levels</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[#fff59d]"
+                          >
+                            <path
+                              d="M20 6L9 17L4 12"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">Supports a calm mind</span>
+                      </li>
+                    </ul>
+                    <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] px-8 py-6 shadow-md hover:shadow-lg transition-all">
+                      Buy Now on Amazon
+                    </Button>
                   </div>
                 </div>
-                <div className="md:w-2/3">
-                  <h2 className="text-3xl font-bold mb-2">Stress Ease Pro</h2>
-                  <div className="flex items-center gap-1 mb-4">
-                    <Star className="h-5 w-5 fill-[#fff59d]" />
-                    <Star className="h-5 w-5 fill-[#fff59d]" />
-                    <Star className="h-5 w-5 fill-[#fff59d]" />
-                    <Star className="h-5 w-5 fill-[#fff59d]" />
-                    <Star className="h-5 w-5 fill-[#fff59d]" />
+              </div>
+
+              {/* Second Product */}
+              <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-lg">
+                <div className="flex flex-col gap-8">
+                  <div className="flex items-center justify-center">
+                    <div className="relative">
+                      <div className="absolute -top-4 -right-4 bg-[#fff59d] text-[#0a0f12] text-sm font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+                        Popular <Star className="h-3 w-3 fill-[#0a0f12]" />
+                      </div>
+                      <div className="bg-white border border-gray-200 rounded-lg h-64 w-64 flex items-center justify-center shadow-sm">
+                        <Image
+                          src="/sleepwellus.jpg"
+                          alt="Sleep Well Plus"
+                          width={200}
+                          height={200}
+                          className="h-48 w-auto"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-gray-300 mb-6">
-                    Our flagship formula designed to help your body adapt to stress naturally. Stress Ease Pro combines
-                    premium Ashwagandha, Holy Basil, and Lemon Balm to reduce tension, balance cortisol levels, and
-                    support a calm mind.
-                  </p>
-                  <ul className="mb-6 space-y-2">
-                    <li className="flex items-start gap-2">
-                      <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="text-[#fff59d]"
-                        >
-                          <path
-                            d="M20 6L9 17L4 12"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <span>Reduces tension & anxiety</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="text-[#fff59d]"
-                        >
-                          <path
-                            d="M20 6L9 17L4 12"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <span>Balances cortisol levels</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="text-[#fff59d]"
-                        >
-                          <path
-                            d="M20 6L9 17L4 12"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <span>Supports a calm mind</span>
-                    </li>
-                  </ul>
-                  <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-white px-8 py-6">Buy Now on Amazon</Button>
+                  <div>
+                    <h2 className="text-3xl font-bold mb-2 text-gray-900">Sleep Well Plus</h2>
+                    <div className="flex items-center gap-1 mb-4">
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                      <Star className="h-5 w-5 fill-[#fff59d]" />
+                    </div>
+                    <p className="text-gray-600 mb-6">
+                      Our advanced sleep formula combines Valerian Root, Passionflower, and Chamomile to help you fall asleep faster, stay asleep longer, and wake up refreshed without morning grogginess.
+                    </p>
+                    <ul className="mb-6 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[#fff59d]"
+                          >
+                            <path
+                              d="M20 6L9 17L4 12"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">Improves sleep quality</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[#fff59d]"
+                          >
+                            <path
+                              d="M20 6L9 17L4 12"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">Non-habit forming</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <div className="rounded-full bg-[#fff59d]/20 p-1 mt-0.5">
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[#fff59d]"
+                          >
+                            <path
+                              d="M20 6L9 17L4 12"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-gray-700">Wake up refreshed</span>
+                      </li>
+                    </ul>
+                    <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] px-8 py-6 shadow-md hover:shadow-lg transition-all">
+                      Buy Now on Amazon
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -314,9 +569,9 @@ export default function Home() {
         </section>
 
         {/* Reviews Section */}
-        <section className="py-16 md:py-24 bg-[#0a0f12]">
+        <section className="py-16 md:py-24 bg-white">
           <div className="container px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">What Our Customers Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">What Our Customers Say</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
@@ -342,7 +597,7 @@ export default function Home() {
               ].map((review, index) => (
                 <div
                   key={index}
-                  className="bg-[#1b1e22] border border-gray-800 rounded-xl p-6 transition-all duration-300 hover:border-[#fff59d]/50"
+                  className="bg-white border border-gray-200 rounded-xl p-6 transition-all duration-300 hover:border-[#fff59d]/50 hover:shadow-lg"
                 >
                   <div className="flex items-center gap-1 mb-4">
                     <Star className="h-4 w-4 fill-[#fff59d]" />
@@ -351,12 +606,12 @@ export default function Home() {
                     <Star className="h-4 w-4 fill-[#fff59d]" />
                     <Star className="h-4 w-4 fill-[#fff59d]" />
                   </div>
-                  <p className="text-gray-300 mb-4">"{review.review}"</p>
+                  <p className="text-gray-600 mb-4">"{review.review}"</p>
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-[#fff59d]/20 flex items-center justify-center text-[#fff59d] font-medium">
                       {review.name.charAt(0)}
                     </div>
-                    <span className="font-medium">{review.name}</span>
+                    <span className="font-medium text-gray-900">{review.name}</span>
                   </div>
                 </div>
               ))}
@@ -365,54 +620,80 @@ export default function Home() {
         </section>
 
         {/* Final CTA Banner */}
-        <section className="py-16 md:py-24 relative overflow-hidden bg-[#0a0f12]">
+        <section className="py-16 md:py-24 relative overflow-hidden bg-white">
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-1/3 left-1/3 w-64 h-64 rounded-full bg-[#fff59d]/20 blur-3xl"></div>
             <div className="absolute bottom-1/3 right-1/3 w-80 h-80 rounded-full bg-[#fff59d]/10 blur-3xl"></div>
           </div>
           <div className="container relative z-10 text-center max-w-3xl mx-auto px-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Your Mind Deserves Peace.</h2>
-            <p className="text-lg text-gray-300 mb-8">Start your wellness journey with HappyMind today.</p>
-            <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-white px-8 py-6 text-lg rounded-full">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Your Mind Deserves Peace.</h2>
+            <p className="text-lg text-gray-600 mb-8">Start your wellness journey with HappyMind today.</p>
+            <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] px-8 py-6 text-lg rounded-full shadow-md hover:shadow-lg transition-all">
               Shop Now
             </Button>
           </div>
         </section>
       </main>
-
+      <section className="py-16 bg-white">
+          <div className="container px-4">
+            <div className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-lg">
+              <Image
+                src="/"
+                alt="Holistic Wellness"
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-center">
+                <div className="max-w-lg px-8 md:px-12">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 drop-shadow-lg">
+                    Timeless Traditions Meet Modern Science
+                  </h2>
+                  <p className="text-gray-100 mb-6 drop-shadow-md">
+                    We combine centuries-old Ayurvedic knowledge with contemporary scientific discoveries
+                    to deliver natural, effective solutions for modern wellness concerns.
+                  </p>
+                  <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] shadow-md hover:shadow-lg transition-all">
+                    Discover More
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       {/* Footer */}
-      <footer className="bg-[#1b1e22] border-t border-gray-800 py-12">
+      <footer className="bg-white border-t border-gray-200 py-12">
         <div className="container px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex flex-col items-center md:items-start gap-4">
               <Image
-                src="/placeholder.svg?height=30&width=140"
+                src="/logo.png"
                 alt="HappyMind Botanicals Logo"
                 width={140}
                 height={30}
                 className="h-8 w-auto"
               />
-              <p className="text-sm text-gray-400">© 2025 HappyMind Botanicals. All rights reserved.</p>
+              <p className="text-sm text-gray-500">© 2025 HappyMind Botanicals. All rights reserved.</p>
             </div>
             <div className="flex flex-col items-center md:items-end gap-4">
               <div className="flex gap-6">
-                <Link href="#" className="text-sm text-gray-300 hover:text-[#fff59d]">
+                <Link href="#" className="text-sm text-gray-600 hover:text-[#fff59d] transition-colors">
                   About
                 </Link>
-                <Link href="#" className="text-sm text-gray-300 hover:text-[#fff59d]">
+                <Link href="#" className="text-sm text-gray-600 hover:text-[#fff59d] transition-colors">
                   Terms
                 </Link>
-                <Link href="#" className="text-sm text-gray-300 hover:text-[#fff59d]">
+                <Link href="#" className="text-sm text-gray-600 hover:text-[#fff59d] transition-colors">
                   Contact
                 </Link>
               </div>
-              <p className="text-sm text-gray-400">contact@happymindbotanicals.com</p>
+              <p className="text-sm text-gray-500">contact@happymindbotanicals.com</p>
               <div className="flex gap-4">
-                <Link href="#" className="text-[#fff59d] hover:text-white transition-colors">
+                <Link href="#" className="text-[#fff59d] hover:text-[#fff176] transition-colors">
                   <Instagram className="h-5 w-5" />
                   <span className="sr-only">Instagram</span>
                 </Link>
-                <Link href="#" className="text-[#fff59d] hover:text-white transition-colors">
+                <Link href="#" className="text-[#fff59d] hover:text-[#fff176] transition-colors">
                   <Facebook className="h-5 w-5" />
                   <span className="sr-only">Facebook</span>
                 </Link>
