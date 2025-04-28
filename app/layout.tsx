@@ -1,10 +1,20 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Archivo } from "next/font/google"
 import "./globals.css"
 import { favicon } from "./favicon"
 
-const inter = Inter({ subsets: ["latin"] })
+const archivo = Archivo({ 
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: '--font-archivo',
+})
+
+// We'll add Clash Display later when we have the font file
+// const clashDisplay = localFont({
+//   src: '../public/fonts/ClashDisplay-Semibold.woff2',
+//   variable: '--font-clash-display',
+// })
 
 export const metadata: Metadata = {
   title: "HappyMind Botanicals - Balance Your Mind, Naturally",
@@ -19,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${archivo.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16" />
@@ -28,7 +38,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#fff59d" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${archivo.className} font-archivo`}>{children}</body>
     </html>
   )
 }

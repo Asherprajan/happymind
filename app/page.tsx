@@ -10,65 +10,14 @@ import 'swiper/css/navigation'
 
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { products } from "@/app/data/products"
+import { Header } from "@/app/components/header"
+import { Footer } from "@/app/components/footer"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#0a0f12] font-sans">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/logo.png"
-              alt="HappyMind Botanicals Logo"
-              width={180}
-              height={40}
-              className="h-10 w-auto"
-            />
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
-              Home
-            </Link>
-            <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
-              About
-            </Link>
-            <Link href="#" className="text-sm font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
-              Contact
-            </Link>
-            <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] shadow-sm hover:shadow-md transition-all">
-              Shop on Amazon
-            </Button>
-          </nav>
-
-          <Sheet>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="outline" size="icon" className="border-gray-300 hover:border-[#fff59d]">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="bg-white border-gray-200">
-              <nav className="flex flex-col gap-4 mt-8">
-                <Link href="#" className="text-lg font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
-                  Home
-                </Link>
-                <Link href="#" className="text-lg font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
-                  About
-                </Link>
-                <Link href="#" className="text-lg font-medium text-gray-700 hover:text-[#fff59d] transition-colors">
-                  Contact
-                </Link>
-                <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] w-full mt-2 shadow-sm hover:shadow-md transition-all">
-                  Shop on Amazon
-                </Button>
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </header>
-
+      <Header />
       <main>
         {/* Hero Banner */}
         <section className="relative my-8 mx-4 md:mx-8 lg:mx-12">
@@ -191,89 +140,50 @@ export default function Home() {
           <div className="container px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">Our Products</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  image: "/stressease.jpg",
-                  name: "Stress Ease Pro",
-                  benefit: "Reduces tension & anxiety",
-                  ingredients: "Ashwagandha, Holy Basil, Lemon Balm",
-                  price: "₹ 699.00",
-                  link:"https://www.amazon.in/HappyMind-Botanicals-Supplement-Headaches-Ashwagandha/dp/B0DSGHLRH7?ref_=ast_sto_dp"
-                },
-                {
-                  image: "/positivesvibesonly.jpg",
-                  name: "Positive Vibes Only",
-                  benefit: "Enhances mood & outlook",
-                  ingredients: "St. John's Wort, Saffron, B Vitamins",
-                  price: "₹ 699.00",
-                  link:"https://www.amazon.in/HappyMind-Botanicals-Supplement-Well-Being-Ashwagandha/dp/B0DSJTWVN8?ref_=ast_sto_dp"
-                },
-                {
-                  image: "/angerandcalm.jpg",
-                  name: "Anger & Calm Ultra",
-                  benefit: "Promotes emotional balance",
-                  ingredients: "Passionflower, Chamomile, Magnesium",
-                  price: "₹ 699.00",
-                  link:"https://www.amazon.in/HappyMind-Botanicals-Naturally-Irritability-Ashwagandha/dp/B0DSJVLPD5?ref_=ast_sto_dp"
-                },
-                {
-                  image: "/memoryandfocus.jpg",
-                  name: "Memory & Focus Max",
-                  benefit: "Sharpens mental clarity",
-                  ingredients: "Bacopa, Ginkgo, Lion's Mane",
-                  price: "₹ 699.00",
-                  link:"https://www.amazon.in/HappyMind-Botanicals-Supplement-Thinking-Shankhpushpi/dp/B0DT7G7CNQ?ref_=ast_sto_dp"
-                },
-                {
-                  image: "/sleepwellus.jpg",
-                  name: "Sleep Well Plus",
-                  benefit: "Supports restful sleep",
-                  ingredients: "Valerian, Melatonin, L-Theanine",
-                  price: "₹ 699.00",
-                  link:"https://www.amazon.in/HappyMind-Botanicals-Sleep-Undisturbed-Ashwagandha/dp/B0DSJR7Z86?ref_=ast_sto_dp"
-                },
-              ].map((product, index) => (
+              {products.map((product) => (
                 <div
-                  key={index}
+                  key={product.id}
                   className="group bg-gradient-to-b from-white to-amber-50 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col h-full"
                 >
-                  <div className="relative h-56 overflow-hidden flex items-center justify-center bg-white">
-                    <Image
-                      src={product.image || "/placeholder.svg?height=1000&width=1000"}
-                      alt={product.name}
-                      width={1000}
-                      height={1000}
-                      className="object-contain w-auto h-full max-h-56 transform group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-3 right-3 bg-amber-100 text-amber-800 rounded-full px-3 py-1 text-xs font-semibold">
-                      Bestseller
-                    </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="flex items-center mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                      ))}
-                      <span className="text-xs text-gray-500 ml-2">4.9 (120)</span>
-                    </div>
-                    <h3 className="text-xl font-bold mb-2 text-gray-900">{product.name}</h3>
-                    <div className="bg-amber-100 text-amber-800 inline-block px-3 py-1 rounded-full text-sm font-medium mb-3">
-                      {product.benefit}
-                    </div>
-                    <p className="text-sm text-gray-600 mb-4 flex-grow">
-                      <span className="font-medium text-gray-700">Key ingredients: </span>
-                      {product.ingredients}
-                    </p>
-                    <div className="mt-auto flex flex-col gap-2">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-lg font-bold text-gray-900">{product.price}</span>
-                        <span className="text-sm text-green-600">Free shipping</span>
+                  <Link href={`/products/${product.id}`} className="flex flex-col h-full">
+                    <div className="relative h-56 overflow-hidden flex items-center justify-center bg-white">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        width={1000}
+                        height={1000}
+                        className="object-contain w-auto h-full max-h-56 transform group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-3 right-3 bg-amber-100 text-amber-800 rounded-full px-3 py-1 text-xs font-semibold">
+                        Bestseller
                       </div>
-                      <Button className="bg-amber-400 hover:bg-amber-500 text-amber-900 w-full transition-all font-medium" onClick={() => window.open(product.link, '_blank')}>
-                        Buy on Amazon
-                      </Button> 
                     </div>
-                  </div>
+                    <div className="p-6 flex flex-col flex-grow">
+                      <div className="flex items-center mb-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                        ))}
+                        <span className="text-xs text-gray-500 ml-2">
+                          {product.rating} ({product.reviews})
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-gray-900">{product.name}</h3>
+                      
+                      <p className="text-sm text-gray-600 mb-4 flex-grow">
+                        <span className="font-medium text-gray-700">Key ingredients: </span>
+                        {product.ingredients.slice(0, 3).join(", ")}
+                      </p>
+                      <div className="mt-auto flex flex-col gap-2">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-lg font-bold text-gray-900">{product.price}</span>
+                          <span className="text-sm text-green-600">Free shipping</span>
+                        </div>
+                        <Button className="bg-amber-400 hover:bg-amber-500 text-amber-900 w-full transition-all font-medium">
+                          View Details
+                        </Button>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -634,74 +544,7 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <section className="py-16 bg-white">
-          <div className="container px-4">
-            <div className="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-lg">
-              <Image
-                src="/"
-                alt="Holistic Wellness"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-center">
-                <div className="max-w-lg px-8 md:px-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 drop-shadow-lg">
-                    Timeless Traditions Meet Modern Science
-                  </h2>
-                  <p className="text-gray-100 mb-6 drop-shadow-md">
-                    We combine centuries-old Ayurvedic knowledge with contemporary scientific discoveries
-                    to deliver natural, effective solutions for modern wellness concerns.
-                  </p>
-                  <Button className="bg-[#fff59d] text-[#0a0f12] hover:bg-[#fff176] shadow-md hover:shadow-lg transition-all">
-                    Discover More
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-12">
-        <div className="container px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex flex-col items-center md:items-start gap-4">
-              <Image
-                src="/logo.png"
-                alt="HappyMind Botanicals Logo"
-                width={140}
-                height={30}
-                className="h-8 w-auto"
-              />
-              <p className="text-sm text-gray-500">© 2025 HappyMind Botanicals. All rights reserved.</p>
-            </div>
-            <div className="flex flex-col items-center md:items-end gap-4">
-              <div className="flex gap-6">
-                <Link href="#" className="text-sm text-gray-600 hover:text-[#fff59d] transition-colors">
-                  About
-                </Link>
-                <Link href="#" className="text-sm text-gray-600 hover:text-[#fff59d] transition-colors">
-                  Terms
-                </Link>
-                <Link href="#" className="text-sm text-gray-600 hover:text-[#fff59d] transition-colors">
-                  Contact
-                </Link>
-              </div>
-              <p className="text-sm text-gray-500">contact@happymindbotanicals.com</p>
-              <div className="flex gap-4">
-                <Link href="#" className="text-[#fff59d] hover:text-[#fff176] transition-colors">
-                  <Instagram className="h-5 w-5" />
-                  <span className="sr-only">Instagram</span>
-                </Link>
-                <Link href="#" className="text-[#fff59d] hover:text-[#fff176] transition-colors">
-                  <Facebook className="h-5 w-5" />
-                  <span className="sr-only">Facebook</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
